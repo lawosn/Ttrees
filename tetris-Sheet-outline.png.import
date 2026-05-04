@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db26pp3r788vc"
-path="res://.godot/imported/malevich-black-square.jpg-17b00bbcc32389a30d565643b7ac30cd.ctex"
+uid="uid://di5g6omwqi3yd"
+path="res://.godot/imported/tetris-Sheet-outline.png-5206a74995bf7c99d9f3aa3a0a2c7e53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://malevich-black-square.jpg"
-dest_files=["res://.godot/imported/malevich-black-square.jpg-17b00bbcc32389a30d565643b7ac30cd.ctex"]
+source_file="res://tetris-Sheet-outline.png"
+dest_files=["res://.godot/imported/tetris-Sheet-outline.png-5206a74995bf7c99d9f3aa3a0a2c7e53.ctex"]
 
 [params]
 
