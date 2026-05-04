@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c7kriyfkvc3v4"]
+
+[ext_resource type="Texture2D" uid="uid://db26pp3r788vc" path="res://malevich-black-square.jpg" id="1_wtcfe"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
+texture = ExtResource("1_wtcfe")
+texture_region_size = Vector2i(400, 400)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_epypp"]
+tile_size = Vector2i(400, 400)
+sources/0 = SubResource("TileSetAtlasSource_0e48y")
+
+[node name="Node2D" type="Node2D" unique_id=214906114]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=984631349]
+scale = Vector2(0.2, 0.2)
+tile_map_data = PackedByteArray(0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_epypp")
