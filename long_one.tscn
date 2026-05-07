@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b6aywlyc0hbrs"]
+
+[ext_resource type="Texture2D" uid="uid://di5g6omwqi3yd" path="res://tetris-Sheet-outline.png" id="1_3cvfr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7260q"]
+texture = ExtResource("1_3cvfr")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+5:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ucmnn"]
+sources/0 = SubResource("TileSetAtlasSource_7260q")
+
+[node name="LongOne" type="Node2D" unique_id=445476783]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2090135997]
+tile_map_data = PackedByteArray(0, 0, 254, 255, 255, 255, 0, 0, 3, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0, 255, 255, 0, 0, 3, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_ucmnn")
