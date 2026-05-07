@@ -41,7 +41,13 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAKAAAAAAAAAAEAAQAKAAAAAAAAAAIAAQAKAAA
 tile_set = SubResource("TileSet_epypp")
 
 [node name="Square" parent="." unique_id=566804214 instance=ExtResource("2_0e48y")]
+<<<<<<< HEAD
 position = Vector2(287, 162)
 
 [node name="Square2" parent="." unique_id=1091196471 instance=ExtResource("2_0e48y")]
 position = Vector2(225, 132)
+=======
+
+[node name="Square2" parent="." unique_id=1091196471 instance=ExtResource("2_0e48y")]
+position = Vector2(34, 34)
+>>>>>>> parent of b5dba93 (changed system for instantiating blocks)
