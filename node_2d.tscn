@@ -19,6 +19,16 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	get_node(\"Square\" + str(num_squares)).fall(delta)
+
+
+func _input(event: InputEvent) -> void:
+	# called when left arrow is pressed
+	if event.is_action_pressed(\"leftArrow\"):
+		pass
+	
+	# called when right arrow is pressed
+	if event.is_action_pressed(\"rightArrow\"):
+		pass
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
