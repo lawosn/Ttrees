@@ -22,5 +22,5 @@ sources/0 = SubResource("TileSetAtlasSource_rxi2a")
 [node name="L,Right" type="Node2D" unique_id=561165252]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2042302479]
-tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 5, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 5, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_1foq3")

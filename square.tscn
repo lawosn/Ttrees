@@ -4,12 +4,6 @@
 
 [sub_resource type="GDScript" id="GDScript_2eeqm"]
 script/source = "extends Node2D
-var leftIsPressed = false
-var leftIsReleased = false
-var rightIsPressed = false
-var rightIsReleased = false
-var downIsPressed = false
-var downIsReleased = false
 
 # Source: AI query
 var time_since_last_drop = 0
@@ -17,32 +11,12 @@ func fall(delta: float) -> void:
 	# Source: multiple AI queries/my own
 	time_since_last_drop += delta
 	if time_since_last_drop >= 1:
-		if self.position.y + 32 < ((get_viewport().get_visible_rect().size.y as int) / 16) * 16:
+		if self.position.y + 48 < ((get_viewport().get_visible_rect().size.y as int) / 16) * 16:
 			self.position.y += 16
 		time_since_last_drop = 0
 
 func _process(delta: float) -> void:
 	pass
-
-# watched some random gdscript tutorial IDK -hahahaha
-func _input(event: InputEvent) -> void:
-	# called when left arrow is pressed
-	if event.is_action_pressed(\"leftArrow\"):
-		if !event.is_action_released(\"leftArrow\"):
-			if self.position.x - 32 > 0:
-				self.position.x -= 16
-	
-	# called when right arrow is pressed
-	if event.is_action_pressed(\"rightArrow\"):
-		if !event.is_action_released(\"rightArrow\"):
-			if self.position.x + 32 < (get_viewport().get_visible_rect().size.x as int):
-				self.position.x += 16
-	
-	#called when down arrow is pressed
-	if event.is_action_pressed(\"downArrow\"):
-		if !event.is_action_released(\"downArrow\"):
-			if self.position.y + 48 < (get_viewport().get_visible_rect().size.y as int):
-				self.position.y += 16
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5epwn"]
@@ -66,5 +40,5 @@ sources/0 = SubResource("TileSetAtlasSource_5epwn")
 script = SubResource("GDScript_2eeqm")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=842084130]
-tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_xncbd")

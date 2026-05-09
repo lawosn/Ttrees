@@ -22,5 +22,5 @@ sources/0 = SubResource("TileSetAtlasSource_l4m26")
 [node name="L\'Hospital_LEFT" type="Node2D" unique_id=346296440]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=888446212]
-tile_map_data = PackedByteArray(0, 0, 255, 255, 254, 255, 0, 0, 8, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 8, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 8, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 8, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_mh1q7")
