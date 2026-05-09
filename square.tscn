@@ -6,14 +6,7 @@
 script/source = "extends Node2D
 
 # Source: AI query
-var time_since_last_drop = 0
-func fall(delta: float) -> void:
-	# Source: multiple AI queries/my own
-	time_since_last_drop += delta
-	if time_since_last_drop >= 1:
-		if self.position.y + 48 < ((get_viewport().get_visible_rect().size.y as int) / 16) * 16:
-			self.position.y += 16
-		time_since_last_drop = 0
+
 
 func _process(delta: float) -> void:
 	pass
