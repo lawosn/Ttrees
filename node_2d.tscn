@@ -13,7 +13,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	fall(delta)
+	if !fall(delta):
+		addShape()
 
 
 func _input(event: InputEvent) -> void:
@@ -35,27 +36,34 @@ func _input(event: InputEvent) -> void:
 			if get_node(\"Square\" + str(num_squares)).position.y + 64 < (get_viewport().get_visible_rect().size.y as int):
 				get_node(\"Square\" + str(num_squares)).position.y += 16
 	
-	#called when down arrow is pressed
+	#makes the block move up
+	#i know
+	#im very silly arent I 
 	if event.is_action_pressed(\"upArrow\"):
 		get_node(\"Square\" + str(num_squares)).position.y -= 16
 
 var time_since_last_drop = 0
-func fall(delta: float) -> void:
+func fall(delta: float) -> bool:
 	# Source: multiple AI queries/my own
 	time_since_last_drop += delta
-	if time_since_last_drop >= 1:
-		if get_node(\"Square\" + str(num_squares)).position.y + 48 < ((get_viewport().get_visible_rect().size.y as int) / 16) * 16:
+	if get_node(\"Square\" + str(num_squares)).position.y + 48 < ((get_viewport().get_visible_rect().size.y as int) / 16) * 16:
+		if time_since_last_drop >= 1:
 			get_node(\"Square\" + str(num_squares)).position.y += 16
-		time_since_last_drop = 0
+			time_since_last_drop = 0
+		return true
+	return false
 
 #add shape
 func addShape() -> void:
-	var square_resource = preload(\"res://l,left.tscn\")
+	var square_resource = preload(\"res://square.tscn\")
 	var square = square_resource.instantiate()
 	square.position = Vector2(16, 16)
 	num_squares += 1
 	square.name = \"Square\" + str(num_squares)
 	add_child(square)
+
+func bottomCheck() -> void:
+	pass
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
