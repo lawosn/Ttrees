@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cenihpa4w06i6"]
+
+[ext_resource type="Texture2D" uid="uid://di5g6omwqi3yd" path="res://tetris-Sheet-outline.png" id="1_fmbvu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx4y2"]
+atlas = ExtResource("1_fmbvu")
+region = Rect2(0, 0, 16, 0)
+
+[node name="Node2D" type="Node2D" unique_id=906130378]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1127779983]
+texture = SubResource("AtlasTexture_vx4y2")
