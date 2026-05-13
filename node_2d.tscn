@@ -5,12 +5,21 @@
 [sub_resource type="GDScript" id="GDScript_0e48y"]
 script/source = "extends Node2D
 
-var num_squares = 0
+var num_shapes = 0
 const tile_yellow = preload(\"res://tile_yellow.tscn\")
-var block: Array[Array]
+var board: Array[Array]
+var WINDOW_HEIGHT
+var WINDOW_WIDTH
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	WINDOW_HEIGHT = (get_viewport().get_visible_rect().size.y as int)
+	WINDOW_WIDTH = (get_viewport().get_visible_rect().size.x as int)
+	for r in range(WINDOW_HEIGHT/16):
+		var temp = []
+		for c in range(WINDOW_WIDTH/16):
+			temp.append(false)
+		board.append(temp)
 	addShape()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,24 +31,24 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	# called when left arrow is pressed
 	if event.is_action_pressed(\"leftArrow\"):
-		if get_node(\"shape\" + str(num_squares)).position.x - 24 > 0:
-			get_node(\"shape\" + str(num_squares)).position.x -= 16
+		if get_node(\"shape\" + str(num_shapes)).position.x - 24 > 0:
+			get_node(\"shape\" + str(num_shapes)).position.x -= 16
 	
 	# called when right arrow is pressed
 	if event.is_action_pressed(\"rightArrow\"):
-		if get_node(\"shape\" + str(num_squares)).position.x + 24 < (get_viewport().get_visible_rect().size.x as int):
-			get_node(\"shape\" + str(num_squares)).position.x += 16
+		if get_node(\"shape\" + str(num_shapes)).position.x + 24 < WINDOW_WIDTH:
+			get_node(\"shape\" + str(num_shapes)).position.x += 16
 	
 	#called when down arrow is pressed
 	if event.is_action_pressed(\"downArrow\"):
-		if get_node(\"shape\" + str(num_squares)).position.y + 24 < (get_viewport().get_visible_rect().size.y as int):
-			get_node(\"shape\" + str(num_squares)).position.y += 16
+		if get_node(\"shape\" + str(num_shapes)).position.y + 24 < WINDOW_HEIGHT:
+			get_node(\"shape\" + str(num_shapes)).position.y += 16
 	
 	#makes the block move up
 	#i know
 	#im very silly arent I 
 	if event.is_action_pressed(\"upArrow\"):
-		get_node(\"shape\" + str(num_squares)).position.y -= 16
+		get_node(\"shape\" + str(num_shapes)).position.y -= 16
 
 #returns true if it can drop/ has space under it
 #returns false when it cant
@@ -47,9 +56,9 @@ var time_since_last_drop = 0
 func fall(delta: float) -> bool:
 	# Source: multiple AI queries/my own
 	time_since_last_drop += delta
-	if get_node(\"shape\" + str(num_squares)).position.y + 24 < ((get_viewport().get_visible_rect().size.y as int) / 16) * 16:
+	if get_node(\"shape\" + str(num_shapes)).position.y + 24 < WINDOW_HEIGHT:
 		if time_since_last_drop >= 1:
-			get_node(\"shape\" + str(num_squares)).position.y += 16
+			get_node(\"shape\" + str(num_shapes)).position.y += 16
 			time_since_last_drop = 0
 		return true
 	return false
@@ -57,10 +66,11 @@ func fall(delta: float) -> bool:
 #add shape
 func addShape() -> void:
 	var shape = tile_yellow.instantiate()
-	shape.position = Vector2(24, 24)
-	num_squares += 1
-	shape.name = \"shape\" + str(num_squares)
+	shape.position = Vector2(24+160-16, 24)
+	num_shapes += 1
+	shape.name = \"shape\" + str(num_shapes)
 	add_child(shape)
+	shape.positionX
 
 func bottomCheck() -> void:
 	pass
