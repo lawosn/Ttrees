@@ -56,7 +56,6 @@ func fall(delta: float) -> bool:
 
 #add shape
 func addShape() -> void:
-	var rand = randi_range(0, 7)
 	var shape = tile_yellow.instantiate()
 	shape.position = Vector2(24, 24)
 	num_squares += 1
