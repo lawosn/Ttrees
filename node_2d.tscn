@@ -7,7 +7,6 @@ script/source = "extends Node2D
 
 var num_shapes = 0
 const tile_yellow = preload(\"res://tile_yellow.tscn\")
-var board: Array[Array]
 var shapeSize: int = 0
 var WINDOW_HEIGHT
 var WINDOW_WIDTH
@@ -16,16 +15,11 @@ var WINDOW_WIDTH
 func _ready() -> void:
 	WINDOW_HEIGHT = (get_viewport().get_visible_rect().size.y as int)
 	WINDOW_WIDTH = (get_viewport().get_visible_rect().size.x as int)
-	for r in range(WINDOW_HEIGHT/16):
-		var temp = []
-		for c in range(WINDOW_WIDTH/16):
-			temp.append(false)
-		board.append(temp)
 	addSquare()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !fall(delta):
+	if !get_node(\"shape\" + str(num_shapes)).fall(delta, WINDOW_HEIGHT):
 		addSquare()
 
 
@@ -51,19 +45,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(\"upArrow\"):
 		get_node(\"shape\" + str(num_shapes)).position.y -= 16
 
-#returns true if it can drop/ has space under it
-#returns false when it cant
-var time_since_last_drop = 0
-func fall(delta: float) -> bool:
-	# Source: multiple AI queries/my own
-	time_since_last_drop += delta
-	if get_node(\"shape\" + str(num_shapes)).position.y + 24 < WINDOW_HEIGHT:
-		if time_since_last_drop >= 1:
-			get_node(\"shape\" + str(num_shapes)).position.y += 16
-			time_since_last_drop = 0
-		return true
-	return false
-
 #add shape
 func addShape() -> void:
 	var shape = tile_yellow.instantiate()
@@ -82,7 +63,7 @@ func addSquare() -> void:
 	for i in range(2):
 		for j in range(2):
 			var block = tile_yellow.instantiate()
-			block.position = Vector2(24+160-16 + (i*16), 24+(j * 16))
+			block.position = Vector2(168 + (i*16), 24+(j * 16))
 			num_shapes+=1
 			block.name = \"shape\" + str(num_shapes)
 			add_child(block)

@@ -13,6 +13,17 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+var time_since_last_drop = 0
+func fall(delta: float, max: int) -> bool:
+	# Source: multiple AI queries/my own
+	time_since_last_drop += delta
+	if time_since_last_drop >= 1:
+		if self.position.y + 24 < max:
+			self.position.y += 16
+			time_since_last_drop = 0
+			return true
+	return false
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vx4y2"]
