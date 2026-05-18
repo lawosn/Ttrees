@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 			get_node(\"shape\" + str(num_shapes - (shapeSize-1) + i)).fall(delta, WINDOW_HEIGHT)
 			
 	else:
-		addSquare()
+		addRandom()
 	
 	
 
@@ -50,18 +50,31 @@ func _input(event: InputEvent) -> void:
 			if !get_node(\"shape\" + str(num_shapes-(shapeSize-1)+i)).position.x - 24 > 0:
 				allLeft = false
 				break
+		
+		for i in range(shapeSize):
+			for j in range(1, num_shapes-(shapeSize-1)):
+				if (!get_node(\"shape\" + str(num_shapes-(shapeSize-1) + i)).position.x-16 < get_node(\"shape\" + str(j)).position.x && get_node(\"shape\" + str(j)).position.y == get_node(\"shape\" + str(num_shapes - (shapeSize-1) + i)).position.y):
+					allLeft = false
+					break
+		
 		if allLeft:
 			for i in range(4):
 				get_node(\"shape\" + str(num_shapes-(shapeSize-1)+i)).position.x -= 16
 	
 	# called when right arrow is pressed
-	
 	if event.is_action_pressed(\"rightArrow\"):
 		var allRight = true
 		for i in range(4):
 			if !get_node(\"shape\" + str(num_shapes-(shapeSize-1)+i)).position.x + 24 < WINDOW_WIDTH:
 				allRight = false
 				break
+		
+		for i in range(shapeSize):
+			for j in range(1, num_shapes-(shapeSize-1)):
+				if (!get_node(\"shape\" + str(num_shapes-(shapeSize-1) + i)).position.x+16 < get_node(\"shape\" + str(j)).position.x && get_node(\"shape\" + str(j)).position.y == get_node(\"shape\" + str(num_shapes - (shapeSize-1) + i)).position.y):
+					allRight = false
+					break
+			
 		if allRight:
 			for i in range(4):
 				get_node(\"shape\" + str(num_shapes-(shapeSize-1)+i)).position.x += 16
@@ -84,6 +97,15 @@ func _input(event: InputEvent) -> void:
 		for i in range(4):
 			get_node(\"shape\" + str(num_shapes-(shapeSize-1)+i)).position.y -= 16
 
+func addRandom() -> void:
+	var i = randi_range(0, 3)
+	if i == 0:
+		addSquare();
+	else: if i == 1:
+		addLHospital()
+	else: if i == 2:
+		addLongOne()
+
 #add shape
 func addShape() -> void:
 	var shape = tile_yellow.instantiate()
@@ -91,10 +113,6 @@ func addShape() -> void:
 	num_shapes += 1
 	shape.name = \"shape\" + str(num_shapes)
 	add_child(shape)
-	#shape.positionX
-
-func bottomCheck() -> void:
-	pass
 
 func addSquare() -> void:
 	shapeSize = 0
@@ -108,7 +126,28 @@ func addSquare() -> void:
 			add_child(block)
 			shapeSize +=1
 	
+
+func addLHospital() -> void:
+	shapeSize = 0
 	
+	for i in range(2):
+		for j in range(2):
+			var block = tile_yellow.instantiate()
+			block.position = Vector2(168 + (i*16), 24+(j * 16) + (i*16))
+			num_shapes+=1
+			block.name = \"shape\" + str(num_shapes)
+			add_child(block)
+			shapeSize +=1
+
+func addLongOne() -> void:
+	shapeSize = 0
+	for i in range(4):
+		var block = tile_yellow.instantiate()
+		block.position = Vector2(168 + (i*16) -16 , 24)
+		num_shapes+=1
+		block.name = \"shape\" + str(num_shapes)
+		add_child(block)
+		shapeSize +=1
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
