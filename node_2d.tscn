@@ -19,6 +19,20 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#checks each row
+	for i in range(38):
+		#checks all the blocks to see if there are 20 in each row
+		var blockInRow = 0
+		for j in range(1, num_shapes):
+			if get_node(\"shape\" + str(j)).position.y == 24 + (i*16):
+				blockInRow+=1
+		if blockInRow == 20:
+			for j in range(1, num_shapes):
+				if get_node(\"shape\" + str(j)).position.y == 24 + (i*16):
+					remove_child(get_node(\"shape\" + str(j)))
+				else:
+					get_node(\"shape\" + str(num_shapes - j)).position.y += 16
+	
 	var allFall = true
 	for i in range(4):
 		if !get_node(\"shape\" + str(num_shapes-(shapeSize-1) + i)).canFall(WINDOW_HEIGHT):
@@ -31,16 +45,11 @@ func _process(delta: float) -> void:
 				allFall = false
 				break
 	
-	
 	if allFall:
 		for i in range(shapeSize):
 			get_node(\"shape\" + str(num_shapes - (shapeSize-1) + i)).fall(delta, WINDOW_HEIGHT)
-			
 	else:
-		addRandom()
-	
-	#checks each row
-	
+		addSquare()
 
 
 func _input(event: InputEvent) -> void:
@@ -117,7 +126,6 @@ func addShape() -> void:
 
 func addSquare() -> void:
 	shapeSize = 0
-	
 	for i in range(2):
 		for j in range(2):
 			var block = tile_yellow.instantiate()
