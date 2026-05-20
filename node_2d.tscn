@@ -15,7 +15,7 @@ var WINDOW_WIDTH
 func _ready() -> void:
 	WINDOW_HEIGHT = (get_viewport().get_visible_rect().size.y as int)
 	WINDOW_WIDTH = (get_viewport().get_visible_rect().size.x as int)
-	addLongOne()
+	addT()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -29,16 +29,17 @@ func _process(delta: float) -> void:
 	
 	for i in range(shapeSize):
 		for j in range(1, num_shapes-(shapeSize-1)):
-			if (!get_node(\"shape\" + str(num_shapes-(shapeSize-1) + i)).position.y+16 < get_node(\"shape\" + str(j)).position.y) && (get_node(\"shape\" + str(num_shapes-(shapeSize-1) + i)).position.x == get_node(\"shape\" + str(j)).position.x):
-				allFall = false
-				break
+			if (get_node(\"shape\" + str(num_shapes-(shapeSize-1) + i)).position.x == get_node(\"shape\" + str(j)).position.x):
+				if (!get_node(\"shape\" + str(num_shapes-(shapeSize-1) + i)).position.y+16 < get_node(\"shape\" + str(j)).position.y):
+					allFall = false
+					break
 	
 	if allFall:
 		for i in range(shapeSize):
 			get_node(\"shape\" + str(num_shapes - (shapeSize-1) + i)).fall(delta, WINDOW_HEIGHT)
 	else:
-		addLongOne()
-	
+		addRandom()
+	pass
 	#checks each row
 	for i in range(38):
 		#checks all the blocks to see if there are 20 in each row
@@ -51,14 +52,16 @@ func _process(delta: float) -> void:
 				if get_node(\"shape\" + str(j)).position.y == 24 + (i*16):
 					remove_child(get_node(\"shape\" + str(j)))
 				else:
-					get_node(\"shape\" + str(j)).position.y += 16
+					if (get_node(\"shape\" + str(j)).position.y< 616):
+						get_node(\"shape\" + str(j)).position.y += 16
 			
 			#renames the blocks
 			var num = 1
-			for j in range(1, num_shapes):
-				if get_node(\"shape\" + str(j)) != null:
-					get_node(\"shape\" + str(j)).name = \"shape\" + str(num)
-					num += 1
+			for j in $\".\":
+				for k in range(1, num_shapes+1):
+					if j.name.equals(\"shape\" + str(k)):
+						j.name = \"shape\" + str(num)
+						num+=1
 			num = 0
 			num_shapes -= 20
 
@@ -119,13 +122,15 @@ func _input(event: InputEvent) -> void:
 			get_node(\"shape\" + str(num_shapes-(shapeSize-1)+i)).position.y -= 16
 
 func addRandom() -> void:
-	var i = randi_range(0, 3)
+	var i = randi_range(0, 4)
 	if i == 0:
 		addSquare();
 	else: if i == 1:
 		addLHospital()
 	else: if i == 2:
 		addLongOne()
+	else: if i == 3:
+		addL()
 
 #add shape
 func addShape() -> void:
@@ -133,7 +138,7 @@ func addShape() -> void:
 	shape.position = Vector2(24+160, 24)
 	num_shapes += 1
 	shape.name = \"shape\" + str(num_shapes)
-	add_child(shape)
+	$\".\".add_child(shape)
 
 func addSquare() -> void:
 	shapeSize = 0
@@ -143,7 +148,7 @@ func addSquare() -> void:
 			block.position = Vector2(184 + (i*16), 24+(j * 16))
 			num_shapes+=1
 			block.name = \"shape\" + str(num_shapes)
-			add_child(block)
+			$\".\".add_child(block)
 			shapeSize +=1
 	
 
@@ -156,7 +161,7 @@ func addLHospital() -> void:
 			block.position = Vector2(184 + (i*16), 24+(j * 16) + (i*16))
 			num_shapes+=1
 			block.name = \"shape\" + str(num_shapes)
-			add_child(block)
+			$\".\".add_child(block)
 			shapeSize +=1
 
 func addLongOne() -> void:
@@ -166,8 +171,32 @@ func addLongOne() -> void:
 		block.position = Vector2(184 + (i*16) -16 , 24)
 		num_shapes+=1
 		block.name = \"shape\" + str(num_shapes)
-		add_child(block)
+		$\".\".add_child(block)
 		shapeSize +=1
+
+func addL() -> void:
+	shapeSize = 4
+	for i in range(4):
+		var block = tile_yellow.instantiate()
+		if i == 3:
+			block.position = Vector2(184 + ((i-2) * 16), 24 + ((i-1) * 16))
+		else:
+			block.position = Vector2(184 , 24 + (i*16))
+		num_shapes+=1
+		block.name = \"shape\" + str(num_shapes)
+		add_child(block)
+
+func addT() -> void:
+	shapeSize = 4
+	for i in range(4):
+		var block = tile_yellow.instantiate()
+		if i == 3:
+			block.position = Vector2(184, 24+ ((i-2)*16))
+		else:
+			block.position = Vector2(184 - 16 + (i *16), 24)
+		num_shapes += 1
+		block.name = \"shape\" + str(num_shapes)
+		add_child(block)
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
