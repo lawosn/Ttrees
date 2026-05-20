@@ -55,11 +55,11 @@ func _process(delta: float) -> void:
 			
 			#renames the blocks
 			var num = 1
-			for j in get_node(\".\").get_children():
-				if j != TileMapLayer:
-					j.name = \"shape\" + str(num)
+			for j in range(1, num_shapes):
+				if get_node(\"shape\" + str(j)) != null:
+					get_node(\"shape\" + str(j)).name = \"shape\" + str(num)
 					num += 1
-			
+			num = 0
 			num_shapes -= 20
 
 
