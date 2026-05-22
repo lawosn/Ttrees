@@ -10,12 +10,13 @@ const tile_yellow = preload(\"res://tile_yellow.tscn\")
 var shapeSize: int = 0
 var WINDOW_HEIGHT
 var WINDOW_WIDTH
+var points: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	WINDOW_HEIGHT = (get_viewport().get_visible_rect().size.y as int)
 	WINDOW_WIDTH = (get_viewport().get_visible_rect().size.x as int)
-	addT()
+	addRandom()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -64,6 +65,7 @@ func _process(delta: float) -> void:
 						num+=1
 			num = 0
 			num_shapes -= 20
+			points += 20
 
 
 func _input(event: InputEvent) -> void:
@@ -122,7 +124,7 @@ func _input(event: InputEvent) -> void:
 			get_node(\"shape\" + str(num_shapes-(shapeSize-1)+i)).position.y -= 16
 
 func addRandom() -> void:
-	var i = randi_range(0, 4)
+	var i = randi_range(0, 5)
 	if i == 0:
 		addSquare();
 	else: if i == 1:
@@ -131,6 +133,8 @@ func addRandom() -> void:
 		addLongOne()
 	else: if i == 3:
 		addL()
+	else: if i == 4:
+		addT()
 
 #add shape
 func addShape() -> void:
